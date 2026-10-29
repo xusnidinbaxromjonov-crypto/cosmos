@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Космическое признание для Севары 🪐</title>
+  <meta name="description" content="Интерактивное космическое послание и портрет из слов для Севары">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Marck+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Space Canvas (Background Stars & Shooting Stars) -->
+  <canvas id="space-bg-canvas"></canvas>
+
+  <!-- Main App Shell -->
+  <div class="app-container" id="app-container">
+    
+    <!-- Clean Minimal Progress Dots -->
+    <header class="top-bar-minimal">
+      <div class="progress-dots" id="progress-dots">
+        <span class="dot active" data-step="1" title="Пароль"></span>
+        <span class="dot" data-step="2" title="Конверт"></span>
+        <span class="dot" data-step="3" title="Галактика"></span>
+        <span class="dot" data-step="4" title="Слова любви"></span>
+        <span class="dot" data-step="5" title="Портрет"></span>
+      </div>
+    </header>
+
+    <!-- STEP 1: Secret Word / Password Screen -->
+    <section class="screen active" id="screen-1">
+      <div class="screen-content center-content">
+        <div class="lock-glow-orb"></div>
+        <h1 class="serif-title">Эта эмоция закрыта словом</h1>
+        <p class="handwriting-subtitle">слово, которое ты так ждала от меня</p>
+        
+        <form id="form-password" class="password-form" onsubmit="return false;">
+          <div class="input-wrapper">
+            <input type="text" id="secret-input" class="pill-input" placeholder="слово" autocomplete="off" spellcheck="false">
+          </div>
+          <button type="submit" id="btn-open-letter" class="gold-btn">Открыть</button>
+          <div class="hint-container">
+            <button type="button" id="btn-hint" class="text-link-btn">Подсказка: «севара» 🤍</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- STEP 2: Envelope & Letter -->
+    <section class="screen" id="screen-2">
+      <div class="screen-content center-content letter-screen-content">
+        <div class="letter-card" id="letter-card">
+          <div class="envelope-wax-seal">🪐</div>
+          <div class="letter-for" id="letter-to-text">Моя любимая Севара 🪐</div>
+          <h2 class="letter-headline">Севара учун...</h2>
+          
+          <div class="letter-body" id="letter-body-text">
+            <p>Севар, манга сиз бефарқ одам эмассиз. Сиз ким билан ёзишасиз, ким билан гаплашасиз, кимга қарайсиз — буларга бефарқ бўлолмайман. Чунки ман сизга нисбатан жиддий ҳисларим борлиги учун рашк қиламан. Ман сизи реально севаман!</p>
+            <p>Агар манга бир марта шанс берсангиз, сизга ваъда бераман: сизни ардоқлайман, ҳурмат қиламан ва қадрингизга етаман. Бу бир-икки кунлик ўткинчи севги эмас. Ман сизга шунчаки ёқтирганим учун эмас, балки сизни ҳурмат қилганим ва сиз билан жиддий муносабат қуришни истаганим учун ёзяпман.</p>
+            <p>Ман сизга ҳозироқ «албатта уйланаман» деб қуруқ ваъда беролмайман. Лекин сиз ман билан гаплашишга имконият берсангиз, бир-биримизнинг характеримизни, фикрларимизни ва қалбимизни яхшироқ тушунишга ҳаракат қиламиз. Ман сизи хафа қилмасликка, кўнглингизни асрашга ва ишончингизни оқлашга ҳаракат қиламан.</p>
+            <p>Ўтмишингизда нима бўлгани, қандай муносабатлар ўтказганингиз ман учун муҳим эмас. Ман сизни ўтмишингиз учун эмас, ҳозирги ўзингиз учун қадрлашни истайман.</p>
+            <div class="letter-signature" id="letter-signature-text">ТВОЙ ЛЮБИМЫЙ ( МУХАМ )💞</div>
+          </div>
+        </div>
+
+        <button type="button" id="btn-to-galaxy" class="gold-btn glow-btn letter-bottom-btn">
+          нажми, там ответ 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 3: Cosmic Spiral Galaxy with Hearts -->
+    <section class="screen" id="screen-3">
+      <div class="screen-content galaxy-screen-content">
+        <canvas id="galaxy-hearts-canvas" class="fullscreen-canvas"></canvas>
+        
+        <div class="galaxy-interactive-hint">
+          <p class="sparkle-hint">✨ Прикоснись к звёздам ✨</p>
+        </div>
+
+        <div class="bottom-action-group">
+          <button type="button" id="btn-to-word-galaxy" class="gold-btn glow-btn">
+            Смотреть глубже 💫
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: Galaxy of Love Confessions -->
+    <section class="screen" id="screen-4">
+      <div class="screen-content word-galaxy-screen-content">
+        <!-- 3D/Canvas Word Galaxy -->
+        <canvas id="word-galaxy-canvas" class="fullscreen-canvas"></canvas>
+        
+        <!-- Glowing Center Action Button "Нажми!" -->
+        <div class="center-callout">
+          <button type="button" id="btn-reveal-portrait" class="center-gold-btn pulse-glow">
+            Нажми!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5: Typographic Text-Portrait of Sevara -->
+    <section class="screen" id="screen-5">
+      <div class="screen-content portrait-screen-content">
+        <!-- Canvas where text portrait of Sevara is drawn -->
+        <div class="portrait-viewport">
+          <canvas id="portrait-canvas"></canvas>
+          <div class="portrait-overlay-glow"></div>
+        </div>
+
+        <div class="portrait-footer">
+          <h2 class="portrait-girl-name" id="portrait-name-display">Севара</h2>
+          <p class="portrait-confession-sub" id="portrait-sub-display">ман сизи реально севаман 🪐</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
