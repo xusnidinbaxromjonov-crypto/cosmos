@@ -28,6 +28,54 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnToGalaxy = document.getElementById('btn-to-galaxy');
   const btnToWordGalaxy = document.getElementById('btn-to-word-galaxy');
   const btnRevealPortrait = document.getElementById('btn-reveal-portrait');
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggleBtn = document.getElementById('music-toggle-btn');
+
+  // Music State
+  let isMusicPlaying = false;
+
+  function playMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.75;
+    const promise = bgMusic.play();
+    if (promise !== undefined) {
+      promise.then(() => {
+        isMusicPlaying = true;
+        updateMusicUI(true);
+      }).catch(err => {
+        console.log('Autoplay waiting for user gesture:', err);
+      });
+    }
+  }
+
+  function pauseMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    isMusicPlaying = false;
+    updateMusicUI(false);
+  }
+
+  function toggleMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+      playMusic();
+    } else {
+      pauseMusic();
+    }
+  }
+
+  function updateMusicUI(playing) {
+    if (!musicToggleBtn) return;
+    if (playing) {
+      musicToggleBtn.classList.add('playing');
+      musicToggleBtn.classList.remove('muted');
+      musicToggleBtn.setAttribute('title', 'Музыка играет (Adele - Lovesong)');
+    } else {
+      musicToggleBtn.classList.remove('playing');
+      musicToggleBtn.classList.add('muted');
+      musicToggleBtn.setAttribute('title', 'Музыка на паузе');
+    }
+  }
 
   // Canvases
   const bgCanvas = document.getElementById('space-bg-canvas');
@@ -93,6 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ================= EVENT LISTENERS =================
   function setupEventListeners() {
+    // Music Toggle Button
+    if (musicToggleBtn) {
+      musicToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMusic();
+      });
+    }
+
+    // Auto-start music on first user gesture anywhere
+    const handleFirstGesture = () => {
+      if (!isMusicPlaying && bgMusic && bgMusic.paused) {
+        playMusic();
+      }
+      window.removeEventListener('click', handleFirstGesture);
+      window.removeEventListener('touchstart', handleFirstGesture);
+      window.removeEventListener('keydown', handleFirstGesture);
+    };
+    window.addEventListener('click', handleFirstGesture, { once: true });
+    window.addEventListener('touchstart', handleFirstGesture, { once: true });
+    window.addEventListener('keydown', handleFirstGesture, { once: true });
+
     // Step 1: Password
     formPassword.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -101,20 +170,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnHint.addEventListener('click', () => {
       secretInput.value = secretPassword;
+      playMusic();
     });
 
     // Step 2 -> 3
     btnToGalaxy.addEventListener('click', () => {
+      playMusic();
       goToStep(3);
     });
 
     // Step 3 -> 4
     btnToWordGalaxy.addEventListener('click', () => {
+      playMusic();
       goToStep(4);
     });
 
     // Step 4 -> 5 ("Нажми!")
     btnRevealPortrait.addEventListener('click', () => {
+      playMusic();
       if (window.WordGalaxy) {
         window.WordGalaxy.triggerZoom(() => {
           goToStep(5);
@@ -127,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step Dots Navigation
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
+        playMusic();
         const step = parseInt(dot.getAttribute('data-step'), 10);
         goToStep(step);
       });
@@ -147,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Friendly matching: accept "севара", "севар", "севаман", "sevara", "люблю"
     if (val === correct || val === 'севара' || val === 'севар' || val === 'севаман' || val === 'sevara' || val === 'люблю' || val.length > 0) {
+      playMusic();
       goToStep(2);
     } else {
       secretInput.style.animation = 'shake 0.4s ease';

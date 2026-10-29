@@ -20,7 +20,7 @@
   <!-- Main App Shell -->
   <div class="app-container" id="app-container">
     
-    <!-- Clean Minimal Progress Dots -->
+    <!-- Clean Minimal Progress Dots & Music Control -->
     <header class="top-bar-minimal">
       <div class="progress-dots" id="progress-dots">
         <span class="dot active" data-step="1" title="Пароль"></span>
@@ -29,7 +29,20 @@
         <span class="dot" data-step="4" title="Слова любви"></span>
         <span class="dot" data-step="5" title="Портрет"></span>
       </div>
+
+      <!-- Music Toggle Button -->
+      <button type="button" id="music-toggle-btn" class="music-toggle-btn" aria-label="Музыка" title="Музыка (Adele - Lovesong)">
+        <span class="music-note-icon">🎵</span>
+        <span class="equalizer-bars">
+          <span class="eq-bar bar-1"></span>
+          <span class="eq-bar bar-2"></span>
+          <span class="eq-bar bar-3"></span>
+        </span>
+      </button>
     </header>
+
+    <!-- Background Music Audio -->
+    <audio id="bg-music" src="assets/music.mp3" preload="auto" loop></audio>
 
     <!-- STEP 1: Secret Word / Password Screen -->
     <section class="screen active" id="screen-1">

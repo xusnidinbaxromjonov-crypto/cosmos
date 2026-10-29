@@ -104,6 +104,106 @@ html, body {
   box-shadow: 0 0 12px var(--gold-glow);
 }
 
+/* Music Toggle Button */
+.music-toggle-btn {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 20px;
+  background: rgba(15, 18, 42, 0.7);
+  border: 1px solid rgba(243, 207, 134, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease;
+  z-index: 65;
+}
+
+.music-toggle-btn:hover {
+  background: rgba(25, 30, 68, 0.85);
+  border-color: rgba(243, 207, 134, 0.7);
+  box-shadow: 0 0 16px rgba(243, 207, 134, 0.25);
+  transform: translateY(-1px);
+}
+
+.music-note-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.eq-bar {
+  width: 2.5px;
+  background: #f3cf86;
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.2s ease;
+}
+
+/* When playing: animated equalizer */
+.music-toggle-btn.playing .music-note-icon {
+  animation: noteBounce 1.8s ease-in-out infinite;
+}
+
+.music-toggle-btn.playing .eq-bar {
+  animation: eqJump 0.8s ease-in-out infinite alternate;
+}
+
+.music-toggle-btn.playing .bar-1 {
+  animation-delay: 0.1s;
+}
+
+.music-toggle-btn.playing .bar-2 {
+  animation-delay: 0.35s;
+}
+
+.music-toggle-btn.playing .bar-3 {
+  animation-delay: 0.2s;
+}
+
+.music-toggle-btn.muted {
+  opacity: 0.55;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.music-toggle-btn.muted .eq-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  animation: none;
+}
+
+@keyframes eqJump {
+  0% { height: 3px; }
+  50% { height: 12px; }
+  100% { height: 6px; }
+}
+
+@keyframes noteBounce {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-8deg) scale(1.08); }
+  75% { transform: rotate(8deg) scale(1.08); }
+}
+
+@media (max-width: 480px) {
+  .music-toggle-btn {
+    right: 12px;
+    padding: 0 9px;
+    height: 32px;
+  }
+}
+
 /* Screen Management */
 .screen {
   position: absolute;
